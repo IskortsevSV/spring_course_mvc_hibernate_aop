@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -26,8 +27,9 @@ public class MyController {
 
         return "all-employees";
     }
+
     @RequestMapping("/addNewEmployee")
-    public String addNewEmployee(Model model){
+    public String addNewEmployee(Model model) {
 
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
@@ -43,6 +45,19 @@ public class MyController {
 
         //redirect - перенаправления
         return "redirect:/";
+    }
+
+    @RequestMapping("/updateInfo")
+//с помощью @RequestParam
+    public String updateEmployee(@RequestParam("empId") int id, Model model) {
+
+        //с помощью ID получаем текущую форму, которую будем обновлять (получаем у employeeService)
+        Employee employee = employeeService.getEmployee(id);
+        // переводим всё в метод saveEmployee (через model.аттрибьют в employee-info.jsp)
+        model.addAttribute("employee",employee);
+
+        return "employee-info";
+
     }
 
 }

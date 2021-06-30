@@ -10,6 +10,8 @@
 <br>
 
     <form:form action="saveEmployee" modelAttribute="employee">
+        <%--скрытая форма для id, она не отображается , иначе id будет default после нажатия OK --%>
+        <form:hidden path="id"/>
 
         Name <form:input path="name"/>
         <br><br>
