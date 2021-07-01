@@ -32,4 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService{
         //получаем Id у БД через ДАО
         return employeeDAO.getEmployee(id);
     }
+
+    @Override
+    @Transactional
+    public void deleteEmployee(int id) {
+
+        employeeDAO.deleteEmployee(id);
+    }
 }
